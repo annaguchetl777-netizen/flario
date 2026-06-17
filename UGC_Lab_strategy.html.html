@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UGC Lab — Маркетинговая стратегия</title>
+<style>
+  :root {
+    --ink: #14101F;
+    --ink-soft: #2A2238;
+    --plum: #3A1D5C;
+    --plum-deep: #271040;
+    --rose: #E0457B;
+    --rose-soft: #F38AB0;
+    --rose-pale: #FBE3EC;
+    --cream: #FBF7F4;
+    --paper: #FFFFFF;
+    --gray: #6B6478;
+    --gray-light: #F3F0F5;
+    --line: #E8E2EE;
+    --green: #1F7A52;
+    --green-pale: #E8F5EE;
+    --text: #211B2C;
+    --max: 1080px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 32px; }
+
+  /* ─── HERO ─────────────────────────────────────── */
+  .hero {
+    background: var(--ink);
+    color: #fff;
+    padding: 88px 0 76px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    right: -160px; top: -160px;
+    width: 540px; height: 540px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--plum), var(--plum-deep));
+    opacity: 0.85;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    right: 60px; top: 90px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(224,69,123,0.4);
+  }
+  .hero .wrap { position: relative; z-index: 2; }
+  .hero .tag {
+    display: inline-block;
+    background: var(--rose);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    padding: 7px 16px;
+    border-radius: 6px;
+    margin-bottom: 28px;
+  }
+  .hero h1 {
+    font-size: clamp(56px, 9vw, 104px);
+    font-weight: 800;
+    letter-spacing: -3px;
+    line-height: 0.92;
+    margin-bottom: 18px;
+  }
+  .hero .sub {
+    font-size: clamp(18px, 2.5vw, 26px);
+    color: var(--rose-soft);
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  .hero .desc { color: #B0A8BE; font-size: 15px; max-width: 480px; }
+  .hero .meta {
+    margin-top: 44px;
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+  .hero .meta .num { font-size: 34px; font-weight: 800; color: var(--rose); letter-spacing: -1px; }
+  .hero .meta .lbl { font-size: 12px; color: #8E869C; margin-top: 2px; }
+
+  /* ─── NAV ─────────────────────────────────────── */
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(20,16,31,0.96);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  nav .wrap {
+    display: flex; gap: 6px; padding: 0 32px;
+    overflow-x: auto; scrollbar-width: none;
+  }
+  nav .wrap::-webkit-scrollbar { display: none; }
+  nav a {
+    color: #B0A8BE;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 16px 14px;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  nav a:hover { color: #fff; border-bottom-color: var(--rose); }
+
+  /* ─── SECTION ─────────────────────────────────────── */
+  section { padding: 72px 0; border-bottom: 1px solid var(--line); }
+  section:nth-child(even) { background: var(--paper); }
+
+  .eyebrow {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 12px; font-weight: 700; letter-spacing: 2px;
+    color: var(--rose); text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .eyebrow .n {
+    background: var(--rose); color: #fff;
+    width: 26px; height: 26px; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 12px; letter-spacing: 0;
+  }
+  h2 {
+    font-size: clamp(30px, 4.5vw, 44px);
+    font-weight: 800; letter-spacing: -1.5px;
+    line-height: 1.05; color: var(--ink);
+    margin-bottom: 18px; max-width: 760px;
+  }
+  .lead { font-size: 18px; color: var(--gray); max-width: 720px; margin-bottom: 40px; }
+
+  h3 { font-size: 21px; font-weight: 700; color: var(--ink); margin: 0 0 12px; letter-spacing: -0.4px; }
+  h4 { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+  p { margin-bottom: 14px; }
+  strong { font-weight: 700; color: var(--ink); }
+
+  /* ─── GOAL BANNER ─────────────────────────────────────── */
+  .goal {
+    background: linear-gradient(120deg, var(--plum), var(--plum-deep));
+    color: #fff; border-radius: 20px; padding: 44px;
+    position: relative; overflow: hidden;
+  }
+  .goal::after {
+    content: ""; position: absolute; right: -60px; bottom: -60px;
+    width: 220px; height: 220px; border-radius: 50%;
+    background: rgba(224,69,123,0.18);
+  }
+  .goal .k { font-size: 12px; letter-spacing: 2px; color: var(--rose-soft); font-weight: 700; text-transform: uppercase; margin-bottom: 14px; position: relative; z-index: 2;}
+  .goal p { font-size: 22px; line-height: 1.45; margin: 0; font-weight: 500; position: relative; z-index: 2; }
+  .goal .hl { color: var(--rose-soft); font-weight: 700; }
+
+  /* ─── COLS ─────────────────────────────────────── */
+  .cols-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .cols-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+
+  .card {
+    background: var(--paper); border: 1px solid var(--line);
+    border-radius: 16px; padding: 28px;
+  }
+  section:nth-child(even) .card { background: var(--cream); }
+  .card.dark { background: var(--ink); color: #fff; border: none; }
+  section:nth-child(even) .card.dark { background: var(--ink); }
+  .card.dark h3, .card.dark h4 { color: #fff; }
+  .card.dark .ctitle { color: var(--rose-soft); }
+  .card .ctitle { font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--rose); margin-bottom: 16px; }
+
+  ul.clean { list-style: none; }
+  ul.clean li { position: relative; padding-left: 22px; margin-bottom: 10px; font-size: 15px; }
+  ul.clean li::before {
+    content: ""; position: absolute; left: 0; top: 9px;
+    width: 8px; height: 8px; border-radius: 50%; background: var(--rose);
+  }
+  .card.dark ul.clean li::before { background: var(--rose-soft); }
+
+  /* ─── LADDER ─────────────────────────────────────── */
+  .ladder { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-top: 10px; }
+  .rung { border-radius: 16px; padding: 26px; position: relative; }
+  .rung.r1 { background: var(--gray-light); }
+  .rung.r2 { background: var(--ink); color: #fff; transform: translateY(-12px); box-shadow: 0 18px 40px rgba(58,29,92,0.28); }
+  .rung.r3 { background: var(--rose-pale); }
+  .rung .role { font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+  .rung.r1 .role { color: var(--gray); }
+  .rung.r2 .role { color: var(--rose-soft); }
+  .rung.r3 .role { color: var(--rose); }
+  .rung.r2.key::after {
+    content: "ЯДРО ЦА"; position: absolute; top: 16px; right: 16px;
+    background: var(--rose); color: #fff; font-size: 9px; font-weight: 700;
+    letter-spacing: 1px; padding: 4px 9px; border-radius: 5px;
+  }
+  .rung h3 { font-size: 18px; }
+  .rung.r2 h3 { color: #fff; }
+  .rung .stat { font-size: 13px; margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(0,0,0,0.08); }
+  .rung.r2 .stat { border-top-color: rgba(255,255,255,0.15); color: #C9C0D6; }
+  .rung.r3 .stat { border-top-color: rgba(224,69,123,0.2); }
+  .rung .stat b { color: var(--rose); }
+  .rung.r2 .stat b { color: var(--rose-soft); }
+
+  /* ─── ARCHETYPES ─────────────────────────────────────── */
+  .grouplbl {
+    font-size: 14px; font-weight: 700; color: var(--ink);
+    background: var(--rose-pale); display: inline-block;
+    padding: 8px 18px; border-radius: 30px; margin: 28px 0 18px;
+  }
+  .grouplbl.teen { background: var(--ink); color: #fff; }
+  .arche { display: grid; grid-template-columns: 150px 1fr; gap: 0; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; margin-bottom: 14px; background: var(--paper); }
+  section:nth-child(even) .arche { background: var(--cream); }
+  .arche .side { background: var(--plum); color: #fff; padding: 22px; display: flex; flex-direction: column; justify-content: center; }
+  .arche .side .nm { font-size: 18px; font-weight: 800; letter-spacing: -0.4px; }
+  .arche .body { padding: 22px 24px; }
+  .arche .body .desc { font-size: 14px; color: var(--gray); margin-bottom: 14px; }
+  .arche .row { display: grid; grid-template-columns: 120px 1fr; gap: 10px; font-size: 13.5px; padding: 5px 0; border-top: 1px dashed var(--line); }
+  .arche .row .rk { font-weight: 700; color: var(--rose); }
+  .arche .row .rk.fear { color: #B0306A; }
+
+  /* ─── PAINS / FEARS ─────────────────────────────────────── */
+  .pain { background: var(--paper); border-left: 3px solid var(--rose); border-radius: 0 12px 12px 0; padding: 20px 24px; margin-bottom: 14px; }
+  section:nth-child(even) .pain { background: var(--cream); }
+  .pain .pt { font-weight: 700; color: var(--ink); font-size: 16px; margin-bottom: 6px; }
+  .pain .pd { font-size: 14.5px; color: var(--gray); margin: 0; }
+
+  /* ─── POSITIONING ─────────────────────────────────────── */
+  .posbox { background: var(--ink); color: #fff; border-radius: 18px; padding: 40px; margin-bottom: 24px; }
+  .posbox p { font-size: 20px; line-height: 1.5; margin: 0; font-weight: 500; }
+  .voice-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; }
+  .voice { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
+  section:nth-child(even) .voice { background: var(--cream); }
+  .voice .vt { font-weight: 800; color: var(--rose); font-size: 16px; margin-bottom: 6px; }
+  .voice p { font-size: 14px; color: var(--gray); margin: 0; }
+
+  /* ─── TOOLS ─────────────────────────────────────── */
+  .tool { background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 32px; margin-bottom: 20px; }
+  section:nth-child(even) .tool { background: var(--cream); }
+  .tool .th { display: flex; align-items: baseline; gap: 14px; margin-bottom: 6px; flex-wrap: wrap; }
+  .tool .tn { font-size: 13px; font-weight: 800; color: #fff; background: var(--rose); width: 30px; height: 30px; border-radius: 9px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .tool .pos { font-size: 14.5px; color: var(--gray); font-style: italic; margin: 8px 0 18px; padding-left: 44px; }
+  .tool .tcols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding-left: 44px; }
+  @media (max-width: 720px){ .tool .tcols { grid-template-columns: 1fr; } .tool .pos, .tool .tcols { padding-left: 0; } }
+  .tool .blk-label { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--rose); margin-bottom: 10px; }
+
+  /* ─── FLOW ─────────────────────────────────────── */
+  .flow { display: flex; align-items: stretch; gap: 0; flex-wrap: wrap; background: var(--ink); border-radius: 18px; padding: 30px; }
+  .flow .step { flex: 1; min-width: 150px; padding: 14px 18px; color: #fff; }
+  .flow .step .si { color: var(--rose); font-weight: 800; font-size: 13px; }
+  .flow .step .st { font-weight: 700; font-size: 16px; margin: 4px 0; }
+  .flow .step .sd { font-size: 13px; color: #B0A8BE; }
+  .flow .arrow { display: flex; align-items: center; color: var(--rose); font-size: 22px; font-weight: 700; }
+
+  /* ─── RUBRICS ─────────────────────────────────────── */
+  .rubrics { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; }
+  .rub { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; }
+  section:nth-child(even) .rub { background: var(--cream); }
+  .rub .rh { font-weight: 700; color: var(--ink); font-size: 15.5px; margin-bottom: 4px; }
+  .rub p { font-size: 13.5px; color: var(--gray); margin: 0; }
+
+  .weeks { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-top: 24px; }
+  .week { border-radius: 14px; padding: 20px; }
+  .week.w1 { background: var(--rose-pale); }
+  .week.w2 { background: var(--green-pale); }
+  .week.w3 { background: #EDE7F5; }
+  .week.w4 { background: var(--ink); color: #fff; }
+  .week .wnum { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--rose); margin-bottom: 6px; }
+  .week.w4 .wnum { color: var(--rose-soft); }
+  .week .wtask { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 12px; }
+  .week.w4 .wtask { color: #fff; }
+  .week ul { list-style: none; }
+  .week li { font-size: 13px; padding: 4px 0; color: var(--text); }
+  .week.w4 li { color: #C9C0D6; }
+
+  /* ─── DO/DONT ─────────────────────────────────────── */
+  .saytable { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; margin-top: 20px; }
+  .saytable .head { padding: 14px 20px; font-weight: 700; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; }
+  .saytable .head.yes { background: var(--green-pale); color: var(--green); }
+  .saytable .head.no { background: var(--gray-light); color: var(--gray); }
+  .saytable .cell { padding: 12px 20px; font-size: 14px; border-top: 1px solid var(--line); }
+  .saytable .cell.yes { color: var(--green); }
+  .saytable .cell.no { color: var(--gray); }
+
+  /* ─── FOOTER ─────────────────────────────────────── */
+  footer { background: var(--ink); color: #fff; padding: 80px 0; position: relative; overflow: hidden; border: none; }
+  footer::before { content: ""; position: absolute; right: -120px; top: -120px; width: 420px; height: 420px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, var(--plum), var(--plum-deep)); }
+  footer .wrap { position: relative; z-index: 2; }
+  footer h2 { color: #fff; font-size: clamp(34px, 6vw, 60px); line-height: 1.0; }
+  footer .accent { color: var(--rose); }
+  footer p { color: var(--rose-soft); font-size: 17px; max-width: 520px; }
+  footer .fmeta { color: #8E869C; font-size: 13px; margin-top: 40px; }
+
+  /* ─── RESEARCH ─────────────────────────────────────── */
+  .rmeta { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 28px; }
+  .rstat { background: var(--ink); color: #fff; border-radius: 14px; padding: 22px; text-align: center; }
+  .rstat .rn { font-size: 32px; font-weight: 800; color: var(--rose-soft); letter-spacing: -1px; }
+  .rstat .rl { font-size: 12px; color: #B0A8BE; margin-top: 4px; }
+  .keyfind { background: linear-gradient(120deg, var(--rose), #C0356A); color: #fff; border-radius: 18px; padding: 36px; margin-bottom: 24px; }
+  .keyfind .kk { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; opacity: 0.85; margin-bottom: 12px; }
+  .keyfind .kbig { font-size: 24px; font-weight: 800; line-height: 1.25; margin-bottom: 14px; letter-spacing: -0.5px; }
+  .keyfind p { font-size: 15px; margin: 0; opacity: 0.95; }
+  .quote { border-left: 3px solid var(--rose); padding: 4px 0 4px 20px; font-style: italic; color: var(--gray); font-size: 15px; margin: 16px 0; }
+  .quote .qa { display: block; font-style: normal; font-size: 13px; color: var(--rose); font-weight: 600; margin-top: 6px; }
+  .barrow { display: grid; grid-template-columns: 1fr 80px; gap: 14px; align-items: center; padding: 9px 0; border-top: 1px solid var(--line); font-size: 14.5px; }
+  .barrow:first-child { border-top: none; }
+  .barrow .bn { font-weight: 700; color: var(--rose); text-align: right; }
+  .twocol-list { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+  /* ─── COMPARE ─────────────────────────────────────── */
+  .compare { width: 100%; border-collapse: collapse; margin-top: 8px; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); }
+  .compare th, .compare td { padding: 14px 18px; text-align: left; font-size: 14.5px; border-bottom: 1px solid var(--line); }
+  .compare thead th { background: var(--ink); color: #fff; font-size: 13px; letter-spacing: 0.5px; }
+  .compare thead th:first-child { background: var(--ink-soft); }
+  .compare tbody td:first-child { font-weight: 700; color: var(--ink); background: var(--gray-light); width: 26%; }
+  section:nth-child(even) .compare tbody td:first-child { background: var(--paper); }
+  .compare td.chat { color: var(--rose); }
+  .compare td.chan { color: var(--plum); font-weight: 600; }
+  .compare tbody tr:last-child td { border-bottom: none; }
+
+  @media (max-width: 860px){
+    .rmeta { grid-template-columns: repeat(2,1fr); }
+    .twocol-list { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 860px){
+    .cols-2, .voice-grid, .rubrics { grid-template-columns: 1fr; }
+    .rung.r2 { transform: none; }
+    .arche { grid-template-columns: 1fr; }
+    .flow .arrow { transform: rotate(90deg); width: 100%; justify-content: center; padding: 4px 0; }
+  }
+
+  @media print {
+    nav { display: none; }
+    section { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <span class="tag">TASHE PROFESSIONAL · ВНУТРЕННИЙ ДОКУМЕНТ</span>
+    <h1>UGC&nbsp;Lab</h1>
+    <div class="sub">Маркетинговая стратегия</div>
+    <p class="desc">Платформа роста начинающих UGC-креаторов. Полное описание стратегии: цели, аудитория, позиционирование, инструменты и комьюнити.</p>
+    <div class="meta">
+      <div><div class="num">$0,5–0,7</div><div class="lbl">целевой CPM</div></div>
+      <div><div class="num">~1 000</div><div class="lbl">подписчиков у ядра ЦА</div></div>
+      <div><div class="num">4</div><div class="lbl">инструмента экосистемы</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <div class="wrap">
+    <a href="#goal">Цель и задачи</a>
+    <a href="#research">Исследование</a>
+    <a href="#audience">Аудитория</a>
+    <a href="#archetypes">Архетипы</a>
+    <a href="#pains">Боли и страхи</a>
+    <a href="#positioning">Позиционирование</a>
+    <a href="#voice">Tone of Voice</a>
+    <a href="#tools">Инструменты</a>
+    <a href="#flow">Жизненный цикл</a>
+    <a href="#community">Комьюнити</a>
+  </div>
+</nav>
+
+<!-- GOAL -->
+<section id="goal">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">1</span> Цель и задачи</div>
+    <h2>Зачем существует UGC Lab</h2>
+
+    <div class="goal">
+      <div class="k">Цель проекта</div>
+      <p>Создать масштабируемый поток органического UGC-контента с прогнозируемым <span class="hl">CPM $0,5–0,7</span>, формируя активное ядро лояльных креаторов, которые растут внутри платформы и становятся долгосрочными <span class="hl">амбассадорами бренда Tashe Professional</span>.</p>
+    </div>
+
+    <div class="cols-3" style="margin-top:24px;">
+      <div class="card dark">
+        <div class="ctitle">Для бренда</div>
+        <ul class="clean">
+          <li>Выстроить CPM в рамках $0,5–0,7 через органический UGC</li>
+          <li>Получить стабильный поток контента с продуктами Tashe</li>
+          <li>Сформировать базу лояльных креаторов, остающихся надолго</li>
+          <li>Превратить участниц в покупателей через промокоды</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="ctitle">Для участницы</div>
+        <ul class="clean">
+          <li>Структурированный вход в профессию без холодных писем и отказов</li>
+          <li>Реальная практика съёмки с продуктами бренда</li>
+          <li>Портфолио и верифицированный статус для коллабораций</li>
+          <li>Среда поддержки, снижающая страх провала и выгорание</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="ctitle">Для платформы</div>
+        <ul class="clean">
+          <li>Циклическая воронка, где каждый генерирует ценность на каждом этапе — даже при недоборе просмотров</li>
+          <li>Максимальная автоматизация — система работает без ручного участия команды при любом масштабе</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">2</span> Ключевое из исследования</div>
+    <h2>CustDev: что мы узнали</h2>
+    <p class="lead">Май 2025 · 6 глубинных интервью с участницами Content Lab. Цель — выявить реальные мотиваторы, барьеры и потребности ЦА. Ниже выжимка, на которой строится вся стратегия.</p>
+
+    <div class="rmeta">
+      <div class="rstat"><div class="rn">6</div><div class="rl">респондентов</div></div>
+      <div class="rstat"><div class="rn">5 / 6</div><div class="rl">имели опыт бартера</div></div>
+      <div class="rstat"><div class="rn">5 / 6</div><div class="rl">хотят монетизировать</div></div>
+      <div class="rstat"><div class="rn">6 / 6</div><div class="rl">готовы к комьюнити</div></div>
+    </div>
+
+    <div class="keyfind">
+      <div class="kk">Главный вывод</div>
+      <div class="kbig">ЦА приходит за кейсом, остаётся ради роста.</div>
+      <p>Участницы не ищут быстрых денег — они ищут доказательство, что у них получается. Первый успешный бартер и первое вирусное видео важнее любых обещаний дохода. Ценностное предложение строится вокруг конкретного результата, а не абстрактного обучения.</p>
+    </div>
+
+    <div class="cols-2">
+      <!-- Профиль ЦА -->
+      <div class="card">
+        <div class="ctitle">Профиль целевой аудитории</div>
+        <p style="font-size:14.5px;color:var(--gray);">Аудитория неоднородна по опыту, но объединена одной психологической потребностью — получить подтверждение собственной состоятельности как создателя контента.</p>
+        <h4 style="margin-top:14px;">Начинающая</h4>
+        <p style="font-size:14px;color:var(--gray);margin-bottom:12px;">Нет или минимальный опыт бартера, закрытый аккаунт переходит в открытый, ещё присутствует страх камеры. Главный вопрос: «С чего начать?»</p>
+        <h4>Опытная</h4>
+        <p style="font-size:14px;color:var(--gray);margin:0;">Несколько бартеров за плечами, понимает контент-стратегию, страх камеры заменён страхом «не залететь». Главный вопрос: «Как масштабировать?»</p>
+        <div class="quote" style="margin-bottom:0;">5 из 6 видят себя через 2–5 лет профессиональным блогером или UGC-амбассадором крупных брендов. Инсайт: позиционировать не как «школу», а как карьерный трамплин.</div>
+      </div>
+
+      <!-- Мотиваторы и барьеры -->
+      <div class="card">
+        <div class="ctitle">Мотиваторы и барьеры</div>
+        <h4 style="margin-bottom:8px;">Что мотивирует снимать</h4>
+        <div class="barrow"><span>Рост подписчиков / охваты</span><span class="bn">5 / 6</span></div>
+        <div class="barrow"><span>Работа с брендами / бартер</span><span class="bn">4 / 6</span></div>
+        <div class="barrow"><span>Монетизация и доход</span><span class="bn">3 / 6</span></div>
+        <div class="barrow"><span>Польза аудитории</span><span class="bn">3 / 6</span></div>
+        <div class="barrow"><span>Творческий процесс</span><span class="bn">2 / 6</span></div>
+        <h4 style="margin:18px 0 8px;">Барьеры — от поверхностных к глубинным</h4>
+        <div class="barrow"><span>Страх низких охватов <span style="color:var(--gray);font-size:12px;">— не проходит даже с опытом</span></span><span class="bn">4 / 6</span></div>
+        <div class="barrow"><span>Неуверенность в качестве контента</span><span class="bn">2 / 6</span></div>
+        <div class="barrow"><span>Страх хейта и публичности</span><span class="bn">2 / 6</span></div>
+        <div class="barrow"><span>Занятость <span style="color:var(--gray);font-size:12px;">— единственный рациональный</span></span><span class="bn">1 / 6</span></div>
+      </div>
+    </div>
+
+    <!-- Реакция на 5000 -->
+    <div class="card dark" style="margin-top:20px;">
+      <div class="ctitle">Реакция на задание «5 000 просмотров»</div>
+      <p style="margin:0;font-size:15.5px;">4 из 6 восприняли задание как мотивацию и сразу начали придумывать идею. 2 из 6 испугались, но справились. <strong style="color:#fff;">Ни одна не отказалась.</strong> Цифра 5 000 работает как вызов, а не барьер — при условии понятного ТЗ.</p>
+    </div>
+
+    <!-- Комьюнити -->
+    <div style="margin-top:20px;" class="cols-2">
+      <div class="card">
+        <div class="ctitle">Потребность в комьюнити</div>
+        <p style="font-size:14.5px;color:var(--gray);">Все 6 участниц испытывают выгорание при низких охватах и нуждаются в социальной поддержке. Форматы нужны разные.</p>
+        <div class="barrow"><span>Telegram-канал с гайдами</span><span class="bn">6 / 6</span></div>
+        <div class="barrow"><span>Чат взаимопомощи</span><span class="bn">5 / 6</span></div>
+        <div class="barrow"><span>Личный ментор (топ-блогер)</span><span class="bn">4 / 6</span></div>
+        <div class="barrow"><span>Закрытая тусовка 100 равных</span><span class="bn">2 / 6</span></div>
+      </div>
+      <div class="card">
+        <div class="ctitle">Инсайт: ментор важнее тусовки</div>
+        <p style="font-size:14.5px;color:var(--gray);">4 из 6 выбрали личного ментора, а не сообщество равных. Они хотят не поговорить с такими же растерянными, а получить ответы от того, у кого уже получилось. Тусовка нужна для поддержки, ментор — для роста.</p>
+        <div class="quote" style="margin-bottom:0;">«Снимаешь видео и ждёшь, пока просмотры залетят или нет — тогда бывает чувство выгорания, хочется поддержки.»<span class="qa">— Акпейил</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUDIENCE -->
+<section id="audience">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">3</span> Целевая аудитория</div>
+    <h2>Лестница из трёх уровней</h2>
+    <p class="lead">Деление аудитории по уровню развития аккаунта выстраивается в чёткую лестницу: <strong>~100 → ~1 000 → ~5 000 подписчиков</strong>, где поведенческие группы совпадают с реальными уровнями аккаунтов. Ключевой сегмент — Растущие с потенциалом.</p>
+
+    <div class="ladder">
+      <div class="rung r1">
+        <div class="role">Портрет 1</div>
+        <h3>Новичок</h3>
+        <p style="font-size:14px;color:var(--gray);margin:0;">Никогда не снимала для брендов. Возможно, нет аккаунта в TikTok. Пришла на волне мотивации — это её главный ресурс, который важно не потерять на старте.</p>
+        <div class="stat"><b>~100</b> подписчиков · медиана <b>500</b> просмотров</div>
+      </div>
+      <div class="rung r2 key">
+        <div class="role">Портрет 2 — ключевой</div>
+        <h3>Начинающий креатор</h3>
+        <p style="font-size:14px;color:#C9C0D6;margin:0;">Снимает хорошо, контент есть. Пишет брендам, но получает отказы или игнор. Постепенно теряет уверенность — начинает думать, что дело в ней, а не в системе.</p>
+        <div class="stat"><b>~1 000</b> подписчиков · медиана <b>1 500</b> просмотров</div>
+      </div>
+      <div class="rung r3">
+        <div class="role">Портрет 3</div>
+        <h3>Опытный креатор</h3>
+        <p style="font-size:14px;color:var(--gray);margin:0;">Снимает уверенно, есть опыт бартерных коллабораций. Понимает, как работает контент. Пришла за системностью, новыми брендами и ростом.</p>
+        <div class="stat"><b>~5 000</b> подписчиков · медиана <b>5 000</b> просмотров</div>
+      </div>
+    </div>
+    <p style="margin-top:24px;font-size:14px;color:var(--gray);"><strong>Не наша аудитория:</strong> аномальные аккаунты (нестабильные, с подозрительной активностью) и спящие / стагнирующие.</p>
+  </div>
+</section>
+
+<!-- ARCHETYPES -->
+<section id="archetypes">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">4</span> Архетипы ключевого портрета</div>
+    <h2>Четыре характера внутри ядра</h2>
+    <p class="lead">Все архетипы Портрета 2 снимают средне или хорошо (просмотры 500–1 000), но приходят за разным и ведут себя по-разному. Делятся на две возрастные группы с разной логикой.</p>
+
+    <div class="grouplbl">Группа 18+ · пришли с целью, ценят время, терпят этапы, нужен результат и смысл</div>
+
+    <div class="arche">
+      <div class="side"><div class="nm">Доказательница</div></div>
+      <div class="body">
+        <p class="desc">Снимает уже какое-то время, но после публикации смотрит в статистику с тревогой. Отправляла брендам — молчание. Пришла доказать себе, что она может. Не брендам — себе.</p>
+        <div class="row"><span class="rk">Мотивация</span><span>Внутреннее подтверждение. «Получу продукт — значит, я не зря всё это делаю»</span></div>
+        <div class="row"><span class="rk fear">Страх</span><span>Снять и снова не залететь — это подтвердит, что дело в ней</span></div>
+        <div class="row"><span class="rk">Удержит</span><span>Выполненное обещание + объяснение, почему видео набрало или нет</span></div>
+        <div class="row"><span class="rk">Как говорить</span><span>«Ты уже умеешь снимать. Тебе нужен первый кейс — мы его дадим»</span></div>
+      </div>
+    </div>
+
+    <div class="arche">
+      <div class="side"><div class="nm">Амбициозная</div></div>
+      <div class="body">
+        <p class="desc">Смотрит на больших блогеров и видит себя там через 2–3 года. Снимает с расчётом — следит за трендами, изучает алгоритмы. UGC Lab — ступенька в карьере, а не «попробовать».</p>
+        <div class="row"><span class="rk">Мотивация</span><span>Карьерный рост. «Первый кейс — строчка в портфолио и шаг к платным заказам»</span></div>
+        <div class="row"><span class="rk fear">Страх</span><span>Платформа окажется несерьёзной — поверхностный курс, скучные продукты, нет роста</span></div>
+        <div class="row"><span class="rk">Удержит</span><span>Качественные продукты, трендовые гайды, ментор с реальным опытом</span></div>
+        <div class="row"><span class="rk">Как говорить</span><span>«Здесь строят карьеру, а не просто снимают»</span></div>
+      </div>
+    </div>
+
+    <div class="arche">
+      <div class="side"><div class="nm">Выживающая</div></div>
+      <div class="body">
+        <p class="desc">Снимает в промежутках между работой, учёбой или ребёнком. Времени мало — каждое видео должно «стоить» потраченных сил. При провале думает не «попробую ещё», а «зачем я вообще трачу время».</p>
+        <div class="row"><span class="rk">Мотивация</span><span>Оправдать усилия. «Если за контент дают хотя бы продукт — это уже не зря»</span></div>
+        <div class="row"><span class="rk fear">Страх</span><span>Потратить редкое свободное время и снова ничего не получить</span></div>
+        <div class="row"><span class="rk">Удержит</span><span>Альтернативные задания при провале + ощущение, что каждый шаг имеет смысл</span></div>
+        <div class="row"><span class="rk">Как говорить</span><span>«Каждое видео — это опыт. Даже если не залетело — ты стала лучше»</span></div>
+      </div>
+    </div>
+
+    <div class="grouplbl teen">Группа 10–17 лет · пришла за статусом, живёт в моменте, нужна скорость и видимость</div>
+
+    <div class="arche">
+      <div class="side"><div class="nm">Альфа-зумер</div></div>
+      <div class="body">
+        <p class="desc">Выросла в TikTok — для неё это среда обитания. Снимает легко и без страха перед камерой. Но техническая уверенность ≠ уверенность в собственной ценности: снимает легко и при этом болезненно переживает, что бренды её не замечают.</p>
+        <div class="row"><span class="rk">Мотивация</span><span>Не деньги пока. «Круто, что реальный бренд меня заметил» — статус среди сверстников</span></div>
+        <div class="row"><span class="rk fear">Страх</span><span>Не провал, а быть невидимой. «Снимаю каждый день, а бренды меня не замечают»</span></div>
+        <div class="row"><span class="rk">Удержит</span><span>Быстрый результат и видимость. Длинные этапы с ожиданием — главный риск потери</span></div>
+        <div class="row"><span class="rk">Как говорить</span><span>Коротко, на языке платформы, без поучений. «Бренд выбрал тебя. Погнали»</span></div>
+      </div>
+    </div>
+
+    <div class="card dark" style="margin-top:24px;">
+      <div class="ctitle">Общий знаменатель</div>
+      <p style="margin:0;font-size:17px;">При всех различиях по опыту, возрасту и мотивации всех объединяет одна потребность — <strong style="color:var(--rose-soft);">получить доказательство, а не обучение</strong>. Все целевые портреты идут к нам за доказательством того, что они чего-то стоят.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PAINS -->
+<section id="pains">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">5</span> Боли и страхи</div>
+    <h2>Что болит и чего боятся</h2>
+
+    <div class="cols-2">
+      <div>
+        <h3 style="margin-bottom:18px;">Боли</h3>
+        <div class="pain"><div class="pt">1. Не знаю, почему не залетело</div><p class="pd">Самая универсальная боль. Проблема не в отсутствии просмотров, а в отсутствии объяснения. Когда непонятно, что пошло не так, единственное доступное объяснение — «дело в ней самой».</p></div>
+        <div class="pain"><div class="pt">2. Усилия не гарантируют результат</div><p class="pd">Снимает, монтирует, публикует — результат непредсказуем. Чем больше усилий, тем болезненнее провал. Старание начинает казаться бессмысленным.</p></div>
+        <div class="pain"><div class="pt">3. Выгорание в паузе между публикацией и результатом</div><p class="pd">Самый уязвимый момент — не съёмка, а ожидание. Видео вышло, сделать ничего нельзя, остаётся смотреть в статистику. Здесь накапливается тревога и желание бросить.</p></div>
+        <div class="pain"><div class="pt">4. Нет первого кейса — нет входа в систему</div><p class="pd">Без кейса нет бартера, без бартера нет кейса. Замкнутый круг не про навыки — про отсутствие точки входа в профессиональную систему.</p></div>
+        <div class="pain"><div class="pt">5. Непонятно, что делать после провала</div><p class="pd">Видео не набрало — нет следующего шага. Платформа молчит, бот не реагирует. Самый простой ответ на вопрос «что теперь?» — просто уйти.</p></div>
+      </div>
+      <div>
+        <h3 style="margin-bottom:18px;">Страхи</h3>
+        <div class="pain"><div class="pt">1. Снять — и снова не залететь</div><p class="pd">Главный и самый устойчивый страх (4 из 6). Не уходит с опытом — трансформируется. У новичка это страх первой публикации, у опытного — страх вложить много и снова получить 300 просмотров.</p></div>
+        <div class="pain"><div class="pt">2. Дело в ней, а не в алгоритме</div><p class="pd">Страх, который никто не называет прямо, но он стоит за всеми остальными. «Алгоритм непредсказуем» конкурирует с «я просто недостаточно хороша» — и второе побеждает тихо.</p></div>
+        <div class="pain"><div class="pt">3. Потратить время и не получить ничего</div><p class="pd">Острее всего у тех, у кого времени мало. Каждое видео — инвестиция. Если она не возвращается ни просмотрами, ни продуктом, ни опытом — смысл исчезает.</p></div>
+        <div class="pain"><div class="pt">4. Остаться без поддержки в трудный момент</div><p class="pd">Не страх провала — страх провала в одиночестве. Когда видео не залетело, рядом никого нет. Именно в этот момент человек уходит — не потому что решил, а потому что не знает, что делать.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POSITIONING -->
+<section id="positioning">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">6</span> Позиционирование</div>
+    <h2>Как мы говорим о себе</h2>
+
+    <div class="posbox">
+      <p>Контент Лаб — платформа роста и поддержки начинающих UGC-креаторов от бренда Tashe. Мы объединяем бесплатное обучение и реальную практику съёмки с продуктами бренда. Пользователь проходит путь от обучения к контенту и остаётся внутри циклической системы создания UGC.</p>
+    </div>
+
+    <div class="cols-3">
+      <div class="card"><h4>Обратная связь внутри платформы</h4><p style="font-size:14px;color:var(--gray);margin:0;">Вместо холодных переговоров с брендами.</p></div>
+      <div class="card"><h4>Понятная система получения продукта</h4><p style="font-size:14px;color:var(--gray);margin:0;">Вместо отказов и игнора в директе.</p></div>
+      <div class="card"><h4>Практика через реальные продукты</h4><p style="font-size:14px;color:var(--gray);margin:0;">Настоящие продукты бренда Tashe для съёмки.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- VOICE -->
+<section id="voice">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">7</span> Tone of Voice</div>
+    <h2>Дружеский и профессиональный</h2>
+    <p class="lead">Два слова описывают интонацию точнее всего. <strong>Дружеский</strong> — мы свои, говорим на одном языке, без дистанции. <strong>Профессиональный</strong> — за лёгкостью тона стоит реальная экспертиза в UGC.</p>
+
+    <div class="voice-grid">
+      <div class="voice"><div class="vt">Поддерживающий</div><p>Аудитория тревожна в момент провала. Мы не давим и не требуем — признаём усилие и показываем следующий шаг.</p></div>
+      <div class="voice"><div class="vt">Конкретный, без воды</div><p>Каждое сообщение отвечает на вопрос «что мне сейчас делать».</p></div>
+      <div class="voice"><div class="vt">Заряжающий движением</div><p>Язык роста и действия, а не правил. Каждое сообщение толкает вперёд, а не сдерживает.</p></div>
+      <div class="voice"><div class="vt">Дружеский — мы свои</div><p>Говорим как старшая подруга, которая уже снимает для брендов и делится не теорией, а опытом. Тёплый, живой, без официоза.</p></div>
+      <div class="voice"><div class="vt">Профессиональный — мы в теме UGC</div><p>За дружеским тоном всегда стоит компетентность: хуки, удержание, тренды, механика контента. К нам приходят за результатом.</p></div>
+      <div class="voice" style="background:var(--ink);color:#fff;border:none;"><div class="vt" style="color:var(--rose-soft);">Правило проверки</div><p style="color:#C9C0D6;">Если убрать имя Tashe и текст всё равно звучит уместно для любого бренда — он недостаточно наш. Голос всегда на стороне участницы.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section id="tools">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">8</span> Инструменты платформы</div>
+    <h2>Четыре инструмента — одна экосистема</h2>
+    <p class="lead">Инструменты закрывают разные боли на разных этапах пути. Они не дублируют друг друга — у каждого своя роль.</p>
+
+    <div class="tool">
+      <div class="th"><span class="tn">1</span><h3>Чат-бот — ядро системы</h3></div>
+      <p class="pos">Личный кабинет UGC-креатора: здесь участница проходит путь, видит прогресс и получает доступ к новым этапам.</p>
+      <div class="tcols">
+        <div>
+          <div class="blk-label">Какие боли закрывает</div>
+          <ul class="clean">
+            <li>«Не знаю с чего начать» — бот ведёт по шагам</li>
+            <li>«Не понимаю, что от меня хотят» — ТЗ до выбора продукта</li>
+            <li>«Не вижу прогресса» — счётчик и уровень показывают движение</li>
+            <li>«Куда нести результат» — публикация и проверка в одном месте</li>
+          </ul>
+        </div>
+        <div>
+          <div class="blk-label">Стратегия</div>
+          <p style="font-size:14.5px;color:var(--gray);">Участница никогда не остаётся без следующего шага. После каждого действия бот говорит, что дальше. После провала — присылает чеклист самодиагностики и направляет в банк решений. Бот не оценивает видео вручную — задаёт правильные вопросы и даёт готовые инструменты.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool">
+      <div class="th"><span class="tn">2</span><h3>Telegram-канал — экспертная среда</h3></div>
+      <p class="pos">Источник, который прокачивает UGC-скилы. Сюда возвращаются за тем, что реально помогает снимать.</p>
+      <div class="tcols">
+        <div>
+          <div class="blk-label">Какие боли закрывает</div>
+          <ul class="clean">
+            <li>«Не знаю, что сейчас залетает» — трендовый дайджест</li>
+            <li>«Почему одно залетело, а другое нет» — разборы с механикой</li>
+            <li>«Не верю, что получится» — кейсы реальных участниц</li>
+            <li>«Не у кого учиться» — спикер месяца с опытом роста от нуля</li>
+          </ul>
+        </div>
+        <div>
+          <div class="blk-label">Стратегия</div>
+          <p style="font-size:14.5px;color:var(--gray);">Канал работает на профессиональную составляющую голоса — здесь мы доказываем экспертизу. Рубрики: трендовый дайджест, разбор видео, кейс участницы, спикер месяца, выпускной, рейтинг. Доступ — после курса, это делает канал наградой. Канал также виральный вход. Главный риск, которого избегаем: канал не должен стать местом «снимайте наши продукты» — фокус всегда на росте участницы.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool">
+      <div class="th"><span class="tn">3</span><h3>Закрытый чат — комьюнити поддержки</h3></div>
+      <p class="pos">Среда, где участница не остаётся одна с провалом. Горизонтальная поддержка от тех, кто проходит тот же путь прямо сейчас.</p>
+      <div class="tcols">
+        <div>
+          <div class="blk-label">Какие боли закрывает</div>
+          <ul class="clean">
+            <li>«Сняла, выложила — и тишина» — живой отклик участниц</li>
+            <li>«У всех получается, только не у меня» — провалы есть у всех</li>
+            <li>«Не знаю, что улучшить» — живая обратная связь на видео</li>
+            <li>«Хочется бросить» — поддержка возвращает в ресурс</li>
+            <li>«Маленький аккаунт» — взаимные просмотры решают холодный старт</li>
+          </ul>
+        </div>
+        <div>
+          <div class="blk-label">Стратегия</div>
+          <p style="font-size:14.5px;color:var(--gray);">Чат работает на дружескую составляющую голоса — тепло, по-свойски, без официоза. Доступ открывается после прохождения курса — вместе с геймификацией и каналом. Требует лёгкой модерации: задача — создать среду, где участницы общаются друг с другом, а не с модератором. Главная ценность — удерживает участницу между попытками, не давая паузе после провала превратиться в уход.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool">
+      <div class="th"><span class="tn">4</span><h3>Личные сообщения с модератором — точечная поддержка</h3></div>
+      <p class="pos">Человеческое касание в моменты, когда автоматики недостаточно. Не служба поддержки по регламенту, а живой человек на стороне участницы.</p>
+      <div class="tcols">
+        <div>
+          <div class="blk-label">Какие боли закрывает</div>
+          <ul class="clean">
+            <li>«Что-то сломалось, и я не понимаю, я ли виновата» — критично для Новичка, воспринимающего баг как «я делаю не так»</li>
+            <li>«У меня нестандартная ситуация» — то, что не покрывает логика бота</li>
+          </ul>
+        </div>
+        <div>
+          <div class="blk-label">Стратегия</div>
+          <p style="font-size:14.5px;color:var(--gray);">Самый дорогой по ресурсу инструмент, поэтому точечный — применяется там, где живое касание решает больше автоматики. Модератор всегда говорит голосом платформы: дружески и профессионально, никогда по корпоративному шаблону.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card dark" style="margin-top:8px;">
+      <div class="ctitle">Как инструменты работают вместе</div>
+      <p style="margin:0;font-size:17px;">Бот — это путь. Канал — это знания. Чат — это поддержка. Модератор — это человек, когда нужен человек. Участница движется по боту, учится в канале, держится за счёт чата и получает живое касание в моменты, когда без него никак.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section id="flow">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">9</span> Жизненный цикл участника</div>
+    <h2>От онбординга к бесконечному циклу</h2>
+    <p class="lead">Путь построен так, что участница генерирует ценность на каждом этапе — даже когда видео не набирает план. Сегодня цикл состоит из двух этапов.</p>
+
+    <div class="flow">
+      <div class="step"><div class="si">01</div><div class="st">Онбординг</div><div class="sd">Прохождение курса с аттестацией. Фильтр на случайных. По завершении открывается доступ к геймификации, чату и каналу одновременно.</div></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="si">02</div><div class="st">Геймификация</div><div class="sd">Доступ к съёмке видео о боте или продукте. Бесконечные попытки — каждое видео новый заход. Этап с самого начала поддерживают чат и канал.</div></div>
+    </div>
+
+    <p style="font-size:14px;color:var(--gray);margin:18px 0 4px;">Результат каждого видео в геймификации определяет вознаграждение:</p>
+
+    <div class="cols-3" style="margin-top:24px;">
+      <div class="card" style="border-top:none;background:var(--gray-light);">
+        <div class="ctitle" style="color:var(--gray);">0–999 просмотров</div>
+        <h4>Образовательная поддержка</h4>
+        <p style="font-size:14px;color:var(--gray);margin:0;">Чеклист самодиагностики + альтернативное задание + поддержка чата. Материального вознаграждения нет — нужно стараться больше.</p>
+      </div>
+      <div class="card" style="background:var(--rose-pale);">
+        <div class="ctitle">1 000–4 999 просмотров</div>
+        <h4>Промокод Tashe</h4>
+        <p style="font-size:14px;color:var(--gray);margin:0;">Результат есть, но не дотянула. Промокод со скидкой — конвертирует тёплую участницу в покупателя. Монетизационная механика, а не утешение.</p>
+      </div>
+      <div class="card dark">
+        <div class="ctitle">5 000+ просмотров</div>
+        <h4 style="color:#fff;">Продукт бесплатно</h4>
+        <p style="font-size:14px;color:#C9C0D6;margin:0;">Заслужила. Получает продукт Tashe для следующей съёмки и растёт в уровне. Цикл продолжается.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY -->
+<section id="community">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">10</span> Комьюнити: рубрики и цикл</div>
+    <h2>Рубрики, цикл и роль каждого канала</h2>
+    <p class="lead">Главный принцип чата: он жив не тогда, когда мы много постим, а когда участницы отвечают друг другу без нас. Наша задача — не быть контентом, а создавать поводы, на которые легко откликнуться. Чем ниже порог входа в ответ, тем больше людей ответят. Канал работает иначе — на вещание пользы.</p>
+
+    <h3 style="margin-bottom:16px;">Рубрики чата</h3>
+    <div class="rubrics">
+      <div class="rub"><div class="rh">🚀 Битва хуков</div><p>Пример хуков → участницы пишут свои → голосуют за самый цепляющий. Соревнование с низким порогом входа.</p></div>
+      <div class="rub"><div class="rh">✍️ Сценарный батл</div><p>Один продукт → мини-сценарии (хук → проблема → решение → результат → CTA) → голосование за лучший.</p></div>
+      <div class="rub"><div class="rh">🎭 Эмоция дня</div><p>Кружок 3–5 секунд с одной эмоцией без монтажа. Снимает страх камеры через игру. Сильнее всего оживляет чат.</p></div>
+      <div class="rub"><div class="rh">🔥 Охота за трендами</div><p>Найти свежий тренд → скинуть ссылку и идею адаптации. Рубрика для разогретого чата и активного ядра.</p></div>
+      <div class="rub"><div class="rh">📱 Будни контент-креатора</div><p>Сколько времени уходит на съёмку, что нравится, что сложнее. Мемы, жизненные картинки. Сближает.</p></div>
+      <div class="rub"><div class="rh">👯 История участницы</div><p>Рассказываем про участницу с залетевшим видео → призываем поддержать. Чистое социальное доказательство.</p></div>
+      <div class="rub"><div class="rh">📊 Помогите выбрать</div><p>Два варианта (обложка, хук) → остальные голосуют. Голосовать легко, высокая вовлечённость.</p></div>
+      <div class="rub"><div class="rh">🙋 А у вас так же?</div><p>Вопрос про общий опыт. Создаёт «я не одна» и провоцирует длинные треды.</p></div>
+      <div class="rub"><div class="rh">🌱 Маленькая победа</div><p>Любой результат: первые 500 просмотров, первый коммент, просто сняла, хотя боялась. Низкий порог, тепло.</p></div>
+      <div class="rub"><div class="rh">🆘 Разбор по кругу</div><p>Скидывает видео, что не залетело → другие советуют. Горизонтальная экспертиза вместо разбора от команды.</p></div>
+      <div class="rub"><div class="rh">🎁 Похвастайся продуктом</div><p>Получила продукт → покажи в чате. Усиливает «бренд выбрал меня», мотивирует тех, кто ещё не дошёл.</p></div>
+      <div class="rub" style="background:var(--ink);color:#fff;border:none;"><div class="rh" style="color:#fff;">⭐ Лучшее → в канал</div><p style="color:#C9C0D6;">Победители голосований публикуются в Telegram-канале с именем автора. Признание + видимость + контент руками участниц.</p></div>
+    </div>
+
+    <h3 style="margin:40px 0 4px;">Месячный цикл</h3>
+    <p style="font-size:15px;color:var(--gray);margin-bottom:8px;">Цикл — один месяц. 3 рубрики (поста) в неделю — плановый минимум; органическое общение участниц идёт сверху. Весь месяц помечаем лучшее для итогов.</p>
+    <div class="weeks">
+      <div class="week w1"><div class="wnum">Неделя 1</div><div class="wtask">Разогрев</div><ul><li>🚀 Битва хуков</li><li>🌱 Маленькая победа</li><li>📱 Будни</li></ul></div>
+      <div class="week w2"><div class="wnum">Неделя 2</div><div class="wtask">Активность и навык</div><ul><li>✍️ Сценарный батл</li><li>📊 Помогите выбрать</li><li>🎭 Эмоция дня</li></ul></div>
+      <div class="week w3"><div class="wnum">Неделя 3</div><div class="wtask">Поддержка и глубина</div><ul><li>🆘 Разбор по кругу</li><li>👯 История участницы</li><li>🔥 Охота за трендами</li></ul></div>
+      <div class="week w4"><div class="wnum">Неделя 4</div><div class="wtask">Итоги</div><ul><li>🎁 Похвастайся продуктом</li><li>🏆 Итоги месяца</li><li>+ анонс цикла</li></ul></div>
+    </div>
+
+    <h3 style="margin:48px 0 4px;">Рубрики Telegram-канала</h3>
+    <p style="font-size:15px;color:var(--gray);margin-bottom:16px;">Канал — экспертная среда. В отличие от чата, здесь принцип не диалог, а вещание пользы: участница возвращается за насмотренностью и знаниями. Метрика — досматриваемость, сохранения, переходы.</p>
+    <div class="rubrics">
+      <div class="rub"><div class="rh">📊 Трендовый дайджест</div><p>Еженедельно: 3 актуальных хука, 2 тренда, 1 успешный кейс. Короткий пост, не лекция. Прямой ответ на главный страх «не залетит».</p></div>
+      <div class="rub"><div class="rh">🎬 Разбор вирусного ролика</div><p>Раскладываем успешное видео: что в первые 3 секунды, что держит до конца, какая эмоция. Формирует насмотренность и понимание механики.</p></div>
+      <div class="rub"><div class="rh">🔍 Глазами бренда</div><p>Разбор продукта перед съёмкой: для кого, какую проблему решает, чем отличается. Учит делать обзоры убедительнее.</p></div>
+      <div class="rub"><div class="rh">🎥 Механика контента</div><p>Образовательные посты про ремесло: B-roll, построение сценария, съёмка без монтажа. Прокачивает UGC-скилы.</p></div>
+      <div class="rub"><div class="rh">👑 Кейс участницы</div><p>История той, кто дошла до результата — как сняла, что сработало, какие просмотры. «Работает и у таких, как я».</p></div>
+      <div class="rub"><div class="rh">⭐ Выбор сообщества</div><p>Лучшие хуки и сценарии из чата, прошедшие голосование — с именем автора и ссылкой на TikTok. Связка чат → канал.</p></div>
+      <div class="rub"><div class="rh">🎤 Спикер месяца</div><p>Блогер 50К+ с историей роста от нуля отвечает на главный вопрос ЦА: «как выйти из маленьких охватов?». Флагманский формат.</p></div>
+      <div class="rub"><div class="rh">🏆 Итоги месяца</div><p>Кульминация цикла: лучшие работы, истории дошедших до продукта, топ активных, суммарные просмотры, анонс нового цикла.</p></div>
+    </div>
+
+    <h3 style="margin:48px 0 4px;">Чат и канал: в чём разница</h3>
+    <p style="font-size:15px;color:var(--gray);margin-bottom:8px;">Два инструмента не дублируют друг друга — у каждого свой принцип, тон и метрика.</p>
+    <table class="compare">
+      <thead>
+        <tr><th>Параметр</th><th>Закрытый чат</th><th>Telegram-канал</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Принцип</td><td class="chat">Диалог между участницами</td><td class="chan">Вещание пользы</td></tr>
+        <tr><td>Тон</td><td class="chat">Дружеский</td><td class="chan">Профессиональный</td></tr>
+        <tr><td>Цель поста</td><td class="chat">Спровоцировать ответы друг другу</td><td class="chan">Дать насмотренность и вернуть на канал</td></tr>
+        <tr><td>Метрика</td><td class="chat">Доля общения без нас</td><td class="chan">Досматриваемость, сохранения</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <h2>UGC Lab — это не бот.<br><span class="accent">Это карьерный трамплин.</span></h2>
+    <p>Участница приходит за продуктом. Остаётся ради роста. Бренд получает контент. Получает амбассадора.</p>
+    <div class="fmeta">Внутренний документ · Tashe Professional · Маркетинговая стратегия</div>
+  </div>
+</footer>
+
+</body>
+</html>
