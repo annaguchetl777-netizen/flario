@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Тестовое задание · Flario Beauty Consultant</title>
+<style>
+:root{
+  --bg:#fdf7f3; --card:#ffffff; --ink:#2b2230; --muted:#7a6f78;
+  --rose:#d98ca0; --rose-deep:#b85c78; --gold:#c79a4b; --soft:#f5e4ea;
+  --line:#efe2e6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--rose-deep)}
+.wrap{max-width:880px;margin:0 auto;padding:0 22px}
+
+header.hero{background:linear-gradient(135deg,#f7d9e2 0%,#fbe9d6 60%,#f8e4ec 100%);
+  padding:72px 0 58px;text-align:center;position:relative;overflow:hidden}
+header.hero::after{content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 20% 20%,rgba(255,255,255,.5),transparent 45%);}
+.badge{display:inline-block;background:rgba(255,255,255,.7);color:var(--rose-deep);
+  font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-size:12px;
+  padding:7px 16px;border-radius:30px;margin-bottom:18px}
+.hero h1{font-size:40px;font-weight:800;letter-spacing:-.5px;position:relative}
+.hero p{color:var(--muted);font-size:18px;margin-top:14px;position:relative}
+.brands{margin-top:20px;font-size:14px;color:var(--rose-deep);font-weight:600;
+  letter-spacing:.1em;position:relative}
+
+.intro{background:var(--card);border:1px solid var(--line);border-radius:18px;
+  padding:28px 30px;margin:-34px auto 0;position:relative;box-shadow:0 8px 30px rgba(184,92,120,.08)}
+.intro p{margin:10px 0}
+
+section{padding:30px 0}
+.kicker{color:var(--gold);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:13px}
+h2.block{font-size:28px;font-weight:800;margin:8px 0 4px}
+.block-sub{color:var(--muted);font-style:italic;margin-bottom:8px}
+
+.task{background:var(--card);border:1px solid var(--line);border-radius:18px;
+  padding:26px 28px;margin-bottom:18px;box-shadow:0 6px 24px rgba(184,92,120,.06)}
+.task h3{font-size:21px;color:var(--rose-deep);margin-bottom:14px}
+.label{display:inline-block;background:var(--soft);color:var(--rose-deep);
+  font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;
+  padding:4px 12px;border-radius:20px;margin:14px 0 6px}
+.label:first-of-type{margin-top:0}
+.hint{background:#fcf2f6;border-left:4px solid var(--gold);border-radius:8px;
+  padding:12px 16px;margin-top:14px;font-size:14px;color:var(--muted)}
+.context p{margin:12px 0}
+.context b{color:var(--ink)}
+
+hr{border:none;border-top:1px solid var(--line);margin:28px 0}
+.framed{background:#fcf2f6;border:2px solid var(--rose);border-radius:14px;
+  padding:18px 22px;margin:14px 0;box-shadow:0 4px 16px rgba(184,92,120,.08)}
+.framed p{margin:0}
+html{scroll-behavior:smooth}
+nav.tasks{position:sticky;top:0;z-index:20;background:rgba(253,247,243,.94);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav.tasks .wrap{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;padding:12px 22px}
+nav.tasks a{font-size:14px;font-weight:700;color:#fff;
+  background:linear-gradient(135deg,var(--rose),var(--rose-deep));
+  padding:9px 18px;border-radius:24px;transition:.2s;box-shadow:0 4px 12px rgba(184,92,120,.2);text-decoration:none}
+nav.tasks a:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(184,92,120,.3)}
+.task{scroll-margin-top:78px}
+nav.tasks{transform:translateY(-120%);opacity:0;pointer-events:none;
+  transition:transform .4s ease,opacity .4s ease}
+nav.tasks.show{transform:translateY(0);opacity:1;pointer-events:auto}
+.deliver{background:linear-gradient(135deg,#fbe9d6,#f7d9e2);
+  border:2px solid var(--rose);border-radius:18px;padding:24px 28px;margin:18px 0;
+  box-shadow:0 6px 24px rgba(184,92,120,.1)}
+.deliver h3{color:var(--rose-deep);font-size:20px;margin-bottom:10px}
+.deliver p{margin:8px 0}
+.deliver .next{background:#fff;border-radius:12px;padding:14px 16px;margin-top:14px;
+  border-left:4px solid var(--gold);font-size:15px}
+
+footer{background:#2b2230;color:#e9dfe4;text-align:center;padding:40px 20px;margin-top:30px}
+footer .brands{color:#f0c3d2}
+.note{font-size:13px;color:#b8a6ae;margin-top:8px}
+@media(max-width:600px){
+  .wrap{padding:0 16px}
+  header.hero{padding:48px 0 40px}
+  .hero h1{font-size:26px}
+  .hero p{font-size:15px}
+  .badge{font-size:11px}
+  .intro{margin-top:0;border-radius:14px;padding:20px 18px}
+  .intro p{font-size:15px}
+  section{padding:22px 0}
+  h2.block{font-size:22px}
+  .block-sub{font-size:14px}
+  .task,.deliver{padding:18px 18px}
+  .task h3{font-size:18px}
+  .deliver h3{font-size:18px}
+  .kicker[style]{font-size:18px !important}
+  .label{font-size:12px;padding:4px 10px}
+  .hint,.deliver .next{font-size:13px}
+  /* мобильное меню заданий */
+  nav.tasks .wrap{gap:6px;padding:10px 12px}
+  nav.tasks a{font-size:12px;padding:8px 12px;border-radius:18px}
+  .framed{padding:14px 16px}
+  .framed p{font-size:14px}
+  footer{padding:30px 16px}
+}
+@media(max-width:360px){
+  .hero h1{font-size:22px}
+  nav.tasks a{font-size:11px;padding:7px 9px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="badge">Тестовое задание</span>
+    <h1>Flario Beauty Consultant 💄</h1>
+    <p>Этап отбора · Community-менеджер 💖</p>
+    <div class="brands">LIMBA &nbsp;·&nbsp; TASHE</div>
+  </div>
+</header>
+
+<nav class="tasks"><div class="wrap">
+  <a href="#task1">Задание 1 💌</a>
+  <a href="#task2">Задание 2 ✨</a>
+  <a href="#task3">Задание 3 💪</a>
+</div></nav>
+
+<div class="wrap">
+  <div class="intro">
+    <p>Мы рады, что вы с нами на этом этапе отбора. Это тестовое задание — <b>возможность показать, как вы мыслите, общаетесь с людьми и создаёте события, которые вдохновляют</b>. Мы не ищем «правильные ответы» — нам важно увидеть <b>ваш подход, вашу энергетику и внимание к деталям</b>.</p>
+  </div>
+
+  <div class="deliver">
+    <h3>📩 Что мы ждём от вас</h3>
+    <p>Пришлите, пожалуйста, <b>документ с выполненными тремя заданиями Блока 1</b> (Ивент-концепция, Контент-план, Кризис-коммуникация) — в любом удобном для вас формате. 💖</p>
+    <div class="next">
+      <b>🎤 Про спич (Блок 2):</b> это следующий этап после письменного задания ✨
+    </div>
+    <p style="margin-top:14px">Уверены, <b>вы справитесь отлично</b>. Если будут вопросы — пишите, мы на связи. ✨</p>
+    <p><b>Желаем удачи и вдохновения!</b> 💫</p>
+  </div>
+</div>
+
+<section><div class="wrap">
+  <div class="kicker">Контекст</div>
+  <h2 class="block" id="about">О сообществе 🌸</h2>
+  <div class="task context">
+    <div class="framed"><p><b>Flario Beauty Consultant</b> — онлайн-сообщество, состоящее из 1000 продавцов-консультантов крупных розничных сетей России, Беларуси и Казахстана.</p></div>
+    <p>Главная цель сообщества — увеличение количества рекомендаций брендов Limba и Tashe в офлайн-торговых точках за счёт повышения лояльности целевой аудитории. Каждая активность в чате, каждая встреча, каждый пост должны работать на эту цель.</p>
+    <div class="framed"><p><b>Закрытое комьюнити</b> — амбассадорское ядро сообщества, состоящее из 25 самых активных участников основного сообщества. Амбассадоры получают статус, признание и доступ к эксклюзивным бонусам. Основная площадка для взаимодействия — закрытый чат.</p></div>
+    <hr>
+    <p><b>Портрет участницы:</b><br>Девушки 20–35 лет из крупных городов России, Беларуси, Казахстана. Работают в зале магазина, дают консультации десяткам покупателей в день.</p>
+    <p><b>Что их радует 😊:</b> коллеги и женское комьюнити, выполнение плана продаж, перерывы и перекусы, признание со стороны покупателей и руководства.</p>
+    <p><b>Боли:</b> усталость, эмоциональное выгорание от общения, рутина.</p>
+    <p><b>Tone of Voice 💗:</b> говорим по-дружески, простым языком, не оцениваем, а поддерживаем, дарим эмоции и позитив, вдохновляем, создаём яркие и запоминающиеся события.</p>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="kicker" style="text-align:center;font-size:22px;margin-bottom:6px">Тестовое задание</div>
+  <div class="deliver" style="background:#fff;border-color:var(--gold);margin-top:8px">
+    <h3>👩‍💼 Ваша роль</h3>
+    <p>Вы — <b>Community-менеджер</b> сообщества продавцов-консультантов брендов Limba и Tashe. Ваша задача — управлять жизнью закрытого клуба, придумывать ивент-концепции, формировать и реализовывать контент-план, представлять бренды на мероприятиях сообщества.</p>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="kicker">Блок 1</div>
+  <h2 class="block">Письменное задание (документ) 📝</h2>
+  <p class="block-sub">Здесь мы оцениваем стратегическое мышление и креативность.</p>
+
+  <div class="task" id="task1">
+    <h3>Задание 1. Ивент-концепция 🥂</h3>
+    <span class="label">Ситуация</span>
+    <p>В августе вы планируете встречу для 25 участниц закрытого амбассадорского клуба. Участницы закрытого чата проголосовали за формат бьюти-бранча в ресторане.</p>
+    <span class="label">Задача</span>
+    <p>Опишите полную концепцию бьюти-бранча: программу, тайминг, локацию, спикеров, подарки. Бюджет — 80 000 rub.</p>
+    <div class="hint">💡 Подсказка: не забудьте, что ключевая цель мероприятий — формирование лояльности к брендам Limba и Tashe.</div>
+  </div>
+
+  <div class="task" id="task2">
+    <h3>Задание 2. Контент-план для закрытого чата 💬</h3>
+    <span class="label">Ситуация</span>
+    <p>Через две недели вы проводите бьюти-бранч для 25 амбассадоров. В закрытом чате нужно создать ажиотаж, заинтересовать участниц и собрать максимум подтверждений. Обычное объявление не работает — нужна драматургия.</p>
+    <span class="label">Задача</span>
+    <p>Напишите 3 темы постов для закрытого чата на неделю (пн, ср, пт). Для одной из тем напишите полный текст сообщения.</p>
+  </div>
+
+  <div class="task" id="task3">
+    <h3>Задание 3. Кризис-коммуникация 🤝</h3>
+    <span class="label">Ситуация</span>
+    <p>За 3 дня до бьюти-бранча из 25 амбассадоров подтвердили участие только 5 человек. Остальные молчат или отвечают уклончиво.</p>
+    <span class="label">Задача</span>
+    <p>Опишите ваши действия.</p>
+    <p><b>Дополнительно:</b> Предложите 3 дополнительных инструмента для повышения лояльности и поощрения участниц комьюнити.</p>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="kicker">Блок 2</div>
+  <h2 class="block">Спич (на личной встрече) 🎤</h2>
+
+  <div class="task">
+    <span class="label">Ситуация</span>
+    <p>На бьюти-бранче запланирован образовательный блок — знакомство с пептидной маской экспресс-восстановление Limba Cosmetics Instant Transformation.</p>
+    <span class="label">Задача</span>
+    <p>Изучить информацию о продукте на сайте «Золотое Яблоко» и провести мини-тренинг (2–3 минуты) с акцентом на ключевые преимущества продукта.</p>
+  </div>
+
+  <div class="task" style="text-align:center;background:linear-gradient(135deg,#fbe9d6,#f7d9e2)">
+    <p style="font-size:17px">Мы будем благодарны за выполнение тестового задания.<br><b>Ждём ваш документ!</b> 💖</p>
+  </div>
+</div></section>
+
+
+<footer>
+  <div class="brands">LIMBA &nbsp;·&nbsp; TASHE</div>
+  <p style="margin-top:10px">Flario Beauty Consultant 💖</p>
+  <p class="note">Тестовое задание · этап отбора</p>
+</footer>
+
+
+<script>
+(function(){
+  var nav = document.querySelector('nav.tasks');
+  var about = document.getElementById('about');
+  function check(){
+    var top = about.getBoundingClientRect().top;
+    if(top <= 80){ nav.classList.add('show'); }
+    else { nav.classList.remove('show'); }
+  }
+  window.addEventListener('scroll', check, {passive:true});
+  window.addEventListener('resize', check);
+  check();
+})();
+</script>
+</body>
+</html>
