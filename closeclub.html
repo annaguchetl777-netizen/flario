@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>План стратегии комьюнити | Flario</title>
+<style>
+  :root {
+    --pink: #EC6A8C;
+    --pink-bright: #F5388A;
+    --pink-light: #F7AEC5;
+    --pink-pale: #FDEFF4;
+    --pink-soft: #FBDDE8;
+    --dark: #1F1E33;
+    --gray: #5A5975;
+    --gray-light: #F4F3F8;
+    --line: rgba(31,30,51,0.09);
+    --white: #FFFFFF;
+    --gold: #C9A96E;
+    --accent: #A660C8;
+    --green: #27AE60;
+    --sidebar-w: 268px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--gray-light);
+    color: var(--dark);
+    line-height: 1.6;
+  }
+
+  /* ---------- LAYOUT ---------- */
+  .layout { display: flex; min-height: 100vh; }
+
+  .progress {
+    position: fixed; top: 0; left: var(--sidebar-w); right: 0; height: 3px;
+    background: transparent; z-index: 200;
+  }
+  .progress span {
+    display: block; height: 100%; width: 0;
+    background: linear-gradient(90deg, var(--pink), var(--accent));
+  }
+
+  /* ---------- SIDEBAR ---------- */
+  .sidebar {
+    width: var(--sidebar-w);
+    background: linear-gradient(180deg, #1A1A2E, #201830);
+    display: flex; flex-direction: column; flex-shrink: 0;
+    position: fixed; top: 0; left: 0; bottom: 0; z-index: 100;
+    overflow-y: auto; scrollbar-width: thin;
+  }
+  .sidebar-logo {
+    padding: 24px 22px 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .logo-mark { font-size: 18px; font-weight: 800; color: #fff; letter-spacing: -0.02em; }
+  .logo-mark span { color: var(--pink-light); }
+  .logo-sub {
+    font-size: 10px; color: rgba(255,255,255,0.45); margin-top: 3px;
+    font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .nav { padding: 14px 12px 24px; flex: 1; display: flex; flex-direction: column; gap: 2px; }
+  .nav-section {
+    font-size: 9px; font-weight: 700; color: rgba(255,255,255,0.32);
+    letter-spacing: 0.12em; text-transform: uppercase; padding: 14px 10px 6px;
+  }
+  .nav-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 12px; border-radius: 10px;
+    color: rgba(255,255,255,0.65); font-size: 13px; font-weight: 500;
+    text-decoration: none; transition: all 0.15s; position: relative;
+  }
+  .nav-item:hover { background: rgba(255,255,255,0.06); color: #fff; }
+  .nav-item.active { background: rgba(232,114,138,0.16); color: var(--pink-light); font-weight: 700; }
+  .nav-item.active::before {
+    content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+    width: 3px; height: 60%; background: var(--pink); border-radius: 0 3px 3px 0;
+  }
+  .nav-icon { font-size: 15px; width: 20px; text-align: center; flex-shrink: 0; }
+  .sidebar-footer {
+    padding: 16px 20px; border-top: 1px solid rgba(255,255,255,0.08);
+    font-size: 10px; color: rgba(255,255,255,0.4); line-height: 1.6;
+  }
+  .sidebar-footer strong { color: rgba(255,255,255,0.7); }
+
+  /* ---------- MAIN ---------- */
+  .main-area { margin-left: var(--sidebar-w); flex: 1; min-width: 0; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  section.page { padding: 64px 48px; scroll-margin-top: 0; }
+  section.page:nth-of-type(even) { background: #fff; }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative; overflow: hidden;
+    background: linear-gradient(160deg, #1A1A2E, #2D1B4E);
+    color: #fff; padding: 84px 48px 72px;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -60%; left: -20%;
+    width: 140%; height: 220%;
+    background: radial-gradient(ellipse at center, rgba(232,114,138,0.18) 0%, transparent 68%);
+  }
+  .hero-inner { position: relative; z-index: 1; }
+  .hero-tag {
+    display: inline-block; background: var(--pink); color: #fff;
+    font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    padding: 6px 16px; border-radius: 20px; margin-bottom: 22px;
+  }
+  .hero-title {
+    font-size: clamp(34px, 5.2vw, 60px); font-weight: 800; line-height: 1.08; margin-bottom: 16px;
+    background: linear-gradient(135deg, #fff 30%, #F5A7B8);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .hero-sub { font-size: 17px; color: rgba(255,255,255,0.72); max-width: 620px; margin-bottom: 32px; }
+  .hero-badges { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 36px; }
+  .badge {
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    color: #fff; padding: 7px 18px; border-radius: 24px; font-size: 13px; font-weight: 500;
+  }
+  .badge.pink { background: rgba(232,114,138,0.3); border-color: var(--pink); }
+  .badge.mute { color: rgba(255,255,255,0.45); border-color: rgba(255,255,255,0.14); text-decoration: line-through; }
+
+  .hero-facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .hero-fact {
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px; padding: 18px 20px;
+  }
+  .hero-fact .hf-num {
+    font-size: 26px; font-weight: 800; color: var(--pink-light);
+    font-family: 'Courier New', monospace; line-height: 1;
+  }
+  .hero-fact .hf-label {
+    font-size: 11px; color: rgba(255,255,255,0.6); margin-top: 8px;
+    text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600;
+  }
+
+  /* ---------- SECTION HEADER ---------- */
+  .section-tag {
+    display: inline-block; background: var(--pink-pale); color: var(--pink);
+    font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    padding: 5px 14px; border-radius: 20px; margin-bottom: 12px;
+  }
+  .section-title { font-size: clamp(26px, 3.4vw, 40px); font-weight: 800; line-height: 1.18; margin-bottom: 12px; }
+  .section-desc { font-size: 16px; color: var(--gray); max-width: 760px; }
+  .section-head { margin-bottom: 40px; }
+
+  h3.sub { font-size: 16px; font-weight: 700; margin: 44px 0 18px; display: flex; align-items: center; gap: 10px; }
+  h3.sub .tag-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--pink); }
+
+  /* ---------- CARDS ---------- */
+  .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; }
+  .card {
+    background: #fff; border-radius: 20px; padding: 26px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  section.page:nth-of-type(even) .card { border: 1px solid var(--line); box-shadow: none; }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 8px 40px rgba(0,0,0,0.12); }
+  .card-num {
+    width: 40px; height: 40px; background: var(--pink); color: #fff; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 16px; margin-bottom: 16px;
+  }
+  .card-num.purple { background: var(--accent); }
+  .card-num.gold { background: var(--gold); }
+  .card-num.green { background: var(--green); }
+  .card-num.dark { background: var(--dark); }
+  .card h4 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .card p { font-size: 14px; color: var(--gray); }
+  .card .metric {
+    margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--gray-light);
+    font-size: 11px; color: var(--pink); font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .chip {
+    background: var(--pink-pale); color: var(--pink); border-radius: 20px;
+    padding: 6px 14px; font-size: 12.5px; font-weight: 600;
+  }
+  .chip.gold { background: rgba(201,169,110,0.16); color: #A87515; }
+  .chip.green { background: rgba(39,174,96,0.12); color: var(--green); }
+  .chip.gray { background: var(--gray-light); color: var(--gray); }
+
+  /* ---------- CALLOUT ---------- */
+  .callout {
+    display: flex; gap: 14px; align-items: flex-start;
+    background: var(--pink-pale); border-radius: 16px; padding: 18px 20px;
+    border-left: 4px solid var(--pink); margin-top: 28px;
+  }
+  .callout .co-ico { font-size: 20px; line-height: 1.2; }
+  .callout p { font-size: 14px; color: var(--gray); }
+  .callout strong { color: var(--dark); }
+  .callout.dark { background: rgba(255,255,255,0.08); border-left-color: var(--pink-light); }
+  .callout.dark p { color: rgba(255,255,255,0.78); }
+  .callout.dark strong { color: #fff; }
+  .callout.gold { background: rgba(201,169,110,0.14); border-left-color: var(--gold); }
+
+  /* ---------- SPLIT: две группы ---------- */
+  .split { display: grid; grid-template-columns: 1fr 96px 1fr; align-items: stretch; gap: 0; }
+  .split-side {
+    background: #fff; border-radius: 22px; padding: 28px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+  }
+  .split-side.locked { background: linear-gradient(150deg, #241C3A, #35204A); color: #fff; }
+  .split-side .ss-tag {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--pink); margin-bottom: 8px;
+  }
+  .split-side.locked .ss-tag { color: var(--pink-light); }
+  .split-side h4 { font-size: 20px; font-weight: 800; margin-bottom: 10px; }
+  .split-side p { font-size: 14px; color: var(--gray); }
+  .split-side.locked p { color: rgba(255,255,255,0.72); }
+  .split-side ul { list-style: none; margin-top: 16px; display: grid; gap: 9px; }
+  .split-side li { font-size: 13.5px; color: var(--gray); display: flex; gap: 9px; align-items: flex-start; }
+  .split-side.locked li { color: rgba(255,255,255,0.75); }
+  .split-side li .mk { color: var(--pink); font-weight: 700; flex-shrink: 0; }
+  .split-side.locked li .mk { color: var(--pink-light); }
+  .split-bridge {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 6px; padding: 0 4px; text-align: center;
+  }
+  .split-bridge .bridge-line { width: 2px; flex: 1; background: linear-gradient(180deg, transparent, var(--pink-light), transparent); }
+  .split-bridge .bridge-ico {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--pink); color: #fff; display: flex; align-items: center; justify-content: center;
+    font-size: 19px; box-shadow: 0 6px 18px rgba(236,106,140,0.4);
+  }
+  .split-bridge .bridge-txt { font-size: 10px; font-weight: 700; color: var(--pink); text-transform: uppercase; letter-spacing: 0.08em; }
+
+  /* ---------- STEPPER ---------- */
+  .stepper { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; }
+  .step { position: relative; padding: 0 12px; }
+  .step::after {
+    content: ''; position: absolute; top: 21px; left: calc(50% + 24px); right: calc(-50% + 24px);
+    height: 2px; background: repeating-linear-gradient(90deg, var(--pink-light) 0 6px, transparent 6px 12px);
+  }
+  .step:last-child::after { display: none; }
+  .step-dot {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: #fff; border: 2px solid var(--pink); color: var(--pink);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 16px; margin: 0 auto 14px; position: relative; z-index: 1;
+  }
+  .step:last-child .step-dot { background: var(--pink); color: #fff; }
+  .step-body { text-align: center; }
+  .step-body h4 { font-size: 14.5px; font-weight: 700; margin-bottom: 5px; }
+  .step-body p { font-size: 12.5px; color: var(--gray); }
+
+  /* ---------- TABLE ---------- */
+  .table-wrap { background: #fff; border-radius: 18px; overflow: hidden; box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  thead th {
+    background: var(--dark); color: #fff; text-align: left; font-weight: 650;
+    padding: 14px 18px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  tbody td { padding: 14px 18px; border-top: 1px solid var(--line); color: var(--gray); vertical-align: top; }
+  tbody td:first-child { font-weight: 700; color: var(--dark); }
+  tbody tr:nth-child(even) td { background: #FCFAFC; }
+  td .lvl {
+    display: inline-block; padding: 3px 10px; border-radius: 14px;
+    font-size: 11.5px; font-weight: 700;
+  }
+  td .lvl.low { background: var(--gray-light); color: var(--gray); }
+  td .lvl.mid { background: var(--pink-pale); color: var(--pink); }
+  td .lvl.high { background: rgba(39,174,96,0.12); color: var(--green); }
+
+  /* ---------- ROLES ---------- */
+  .roles { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; }
+  .role {
+    background: #fff; border-radius: 16px; padding: 20px;
+    border: 1px solid var(--line); display: flex; gap: 14px; align-items: flex-start;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .role:hover { border-color: var(--pink-light); transform: translateY(-3px); }
+  .role-ico {
+    width: 40px; height: 40px; border-radius: 12px; background: var(--pink-pale);
+    display: flex; align-items: center; justify-content: center; font-size: 19px; flex-shrink: 0;
+  }
+  .role-n { font-size: 10px; font-weight: 800; color: var(--pink); letter-spacing: 0.08em; }
+  .role h4 { font-size: 14px; font-weight: 700; margin: 2px 0 5px; }
+  .role p { font-size: 12.5px; color: var(--gray); }
+
+  /* ---------- METRICS ---------- */
+  .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .metric-card {
+    background: #fff; border-radius: 20px; padding: 26px; border: 1px solid var(--line);
+    display: flex; flex-direction: column;
+  }
+  .metric-card .mc-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  .metric-card .mc-n { font-size: 11px; font-weight: 800; color: var(--pink); letter-spacing: 0.1em; }
+  .metric-card .mc-val {
+    font-family: 'Courier New', monospace; font-size: 30px; font-weight: 800; color: var(--gray-light);
+    line-height: 1;
+  }
+  .metric-card h4 { font-size: 17px; font-weight: 800; margin-bottom: 8px; }
+  .metric-card p { font-size: 13.5px; color: var(--gray); flex: 1; }
+  .metric-meta { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--gray-light); display: grid; gap: 6px; }
+  .metric-meta div { display: flex; gap: 8px; font-size: 11.5px; }
+  .metric-meta .mm-k { color: var(--pink); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; min-width: 68px; }
+  .metric-meta .mm-v { color: var(--gray); }
+
+  /* ---------- FUNNEL ---------- */
+  .funnel { display: grid; gap: 10px; justify-items: center; }
+  .funnel-row {
+    border-radius: 16px; padding: 20px 26px; color: #fff; text-align: center;
+    box-shadow: 0 6px 22px rgba(31,30,51,0.12);
+  }
+  .funnel-row .fr-title { font-size: 15.5px; font-weight: 800; }
+  .funnel-row .fr-sub { font-size: 12.5px; opacity: 0.85; margin-top: 4px; }
+  .fr-1 { width: 100%; background: linear-gradient(135deg, #3A2B55, #2A2140); }
+  .fr-2 { width: 82%; background: linear-gradient(135deg, var(--accent), #8B4FB0); }
+  .fr-3 { width: 64%; background: linear-gradient(135deg, var(--pink), #D9527A); }
+  .fr-4 { width: 48%; background: linear-gradient(135deg, var(--green), #1E8E4E); }
+  .funnel-arrow { color: var(--pink-light); font-size: 16px; line-height: 1; }
+
+  /* ---------- LINES (привилегии) ---------- */
+  .lines { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .line-card {
+    background: #fff; border-radius: 20px; overflow: hidden;
+    border: 1px solid var(--line); display: flex; flex-direction: column;
+  }
+  .line-head { padding: 22px 24px 18px; }
+  .line-head .lh-ico { font-size: 26px; }
+  .line-head h4 { font-size: 19px; font-weight: 800; margin: 8px 0 4px; }
+  .line-head p { font-size: 12.5px; color: var(--gray); }
+  .line-cond {
+    margin-top: auto; padding: 16px 24px; background: var(--pink-pale);
+    font-size: 13.5px; font-weight: 650; color: var(--dark);
+  }
+  .line-cond .lc-k {
+    display: block; font-size: 10px; font-weight: 800; color: var(--pink);
+    letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px;
+  }
+  .line-card.gold .line-cond { background: rgba(201,169,110,0.14); }
+  .line-card.gold .line-cond .lc-k { color: #A87515; }
+  .line-card.purple .line-cond { background: rgba(166,96,200,0.12); }
+  .line-card.purple .line-cond .lc-k { color: var(--accent); }
+  .converge { text-align: center; color: var(--pink-light); font-size: 20px; margin: 14px 0 12px; }
+  .converge-banner {
+    background: linear-gradient(135deg, var(--pink), var(--accent)); color: #fff;
+    border-radius: 20px; padding: 24px 28px;
+    display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+  }
+  .converge-banner h4 { font-size: 20px; font-weight: 800; }
+  .converge-banner p { font-size: 13.5px; opacity: 0.9; margin-top: 4px; }
+  .converge-banner .cb-num { font-size: 40px; font-weight: 800; font-family: 'Courier New', monospace; }
+
+  /* ---------- MONTH TRACK ---------- */
+  .track { display: grid; grid-template-columns: 1fr 52px 1fr 52px 1fr; align-items: center; }
+  .track-card {
+    background: #fff; border-radius: 18px; padding: 24px; border: 1px solid var(--line);
+    border-top: 4px solid var(--green);
+  }
+  .track-card.warn { border-top-color: var(--gold); }
+  .track-card.out { border-top-color: var(--dark); }
+  .track-card .tc-state {
+    font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green);
+  }
+  .track-card.warn .tc-state { color: #A87515; }
+  .track-card.out .tc-state { color: var(--dark); }
+  .track-card h4 { font-size: 17px; font-weight: 800; margin: 6px 0 6px; }
+  .track-card p { font-size: 13px; color: var(--gray); }
+  .track-link { text-align: center; }
+  .track-link .tl-cond {
+    font-size: 10px; font-weight: 700; color: var(--pink); text-transform: uppercase;
+    letter-spacing: 0.05em; display: block; margin-bottom: 4px; line-height: 1.3;
+  }
+  .track-link .tl-arrow { color: var(--pink); font-size: 18px; }
+  .track-back {
+    margin-top: 14px; text-align: center; font-size: 12.5px; color: var(--gray);
+    background: var(--gray-light); border-radius: 14px; padding: 12px 16px;
+  }
+  .track-back strong { color: var(--green); }
+
+  /* ---------- TIMELINE (этапы) ---------- */
+  .tl { position: relative; padding-left: 34px; }
+  .tl::before { content: ''; position: absolute; left: 11px; top: 8px; bottom: 8px; width: 2px; background: var(--pink-soft); }
+  .tl-item { position: relative; margin-bottom: 18px; }
+  .tl-item::before {
+    content: ''; position: absolute; left: -29px; top: 20px;
+    width: 12px; height: 12px; border-radius: 50%; background: var(--pink);
+    border: 3px solid #fff; box-shadow: 0 0 0 2px var(--pink-soft);
+  }
+  .tl-body { background: #fff; border-radius: 16px; padding: 20px 24px; border: 1px solid var(--line); }
+  .tl-body h4 { font-size: 15px; font-weight: 700; margin-bottom: 5px; }
+  .tl-body p { font-size: 13.5px; color: var(--gray); }
+
+  /* ---------- LIFE (жизнь клуба) ---------- */
+  .life { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+  .life-card {
+    background: #fff; border-radius: 18px; padding: 16px;
+    border: 1px solid var(--line);
+    display: flex; flex-direction: column; min-width: 0;
+  }
+  .life-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+  .life-ico { font-size: 20px; }
+  .life-freq {
+    background: var(--dark); color: #fff; border-radius: 14px; padding: 4px 8px;
+    font-size: 9.5px; font-weight: 700; text-align: right; line-height: 1.25;
+  }
+  .life-card h4 { font-size: 13.5px; font-weight: 800; margin-bottom: 4px; line-height: 1.25; }
+  .life-why { font-size: 11px; color: var(--pink); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 8px; }
+  .life-where { font-size: 12px; color: var(--gray); }
+
+  footer.doc-footer {
+    background: var(--dark); color: rgba(255,255,255,0.55);
+    padding: 34px 48px; font-size: 12.5px;
+  }
+  footer.doc-footer strong { color: #fff; }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 1080px) {
+    .hero-facts { grid-template-columns: repeat(2, 1fr); }
+    .metrics, .lines { grid-template-columns: 1fr; }
+    .stepper { grid-template-columns: 1fr 1fr; gap: 24px 0; }
+    .step::after { display: none; }
+    .track { grid-template-columns: 1fr; gap: 10px; }
+    .track-link { transform: rotate(90deg); padding: 6px 0; }
+    .split { grid-template-columns: 1fr; }
+    .split-bridge { flex-direction: row; padding: 14px 0; }
+    .split-bridge .bridge-line { width: auto; height: 2px; flex: 1; background: linear-gradient(90deg, transparent, var(--pink-light), transparent); }
+    .funnel-row { width: 100% !important; }
+    .life { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 860px) {
+    :root { --sidebar-w: 0px; }
+    .sidebar { display: none; }
+    .main-area { margin-left: 0; }
+    section.page, .hero, footer.doc-footer { padding-left: 20px; padding-right: 20px; }
+    .hero-facts { grid-template-columns: 1fr; }
+    .life { grid-template-columns: 1fr; }
+  }
+  @media print {
+    .sidebar, .progress { display: none; }
+    .main-area { margin-left: 0; }
+    section.page { break-inside: avoid; padding: 28px 0; }
+    .card:hover, .role:hover { transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress"><span id="progressBar"></span></div>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-mark">FLARIO<span>.</span></div>
+      <div class="logo-sub">План стратегии комьюнити</div>
+    </div>
+    <nav class="nav" id="nav">
+      <div class="nav-section">Рамка</div>
+      <a class="nav-item" href="#celi"><span class="nav-icon">🎯</span> 01 · Цели</a>
+      <a class="nav-item" href="#gruppy"><span class="nav-icon">👥</span> 02 · Две группы</a>
+      <a class="nav-item" href="#klub"><span class="nav-icon">🚪</span> Воронка в чат</a>
+      <a class="nav-item" href="#privilegii"><span class="nav-icon">🎁</span> Три бонуса</a>
+      <a class="nav-item" href="#mesyac"><span class="nav-icon">🗓️</span> Месяц</a>
+      <a class="nav-item" href="#roli"><span class="nav-icon">🎭</span> 04 · Роли</a>
+      <a class="nav-item" href="#zhizn"><span class="nav-icon">💬</span> Ритм чата</a>
+    </nav>
+    <div class="sidebar-footer">
+      <strong>Flario · Золотое Яблоко</strong>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-area">
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="container hero-inner">
+        <span class="hero-tag">Стратегия комьюнити</span>
+        <h1 class="hero-title">Закрытый клуб<br>консультантов Золотого Яблока</h1>
+        <p class="hero-sub">
+          Сообщество консультантов Золотого Яблока. 
+        </p>
+        <div class="hero-badges">
+          <span class="badge pink">Золотое Яблоко</span>
+          <span class="badge">РБ</span>
+          <span class="badge">РФ</span>
+          <span class="badge">КЗ</span>
+        </div>
+        <div class="hero-facts">
+          <div class="hero-fact">
+            <div class="hf-num">Топ-30</div>
+            <div class="hf-label">Рейтинг Flario, каждый месяц</div>
+          </div>
+          <div class="hero-fact">
+            <div class="hf-num">Топ-3</div>
+            <div class="hf-label">Попадают в комьюнити</div>
+          </div>
+          <div class="hero-fact">
+            <div class="hf-num">3</div>
+            <div class="hf-label">Условия</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 01 ЦЕЛИ -->
+    <section class="page" id="celi">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-tag">01 · Цели</span>
+          <h2 class="section-title">Цели комьюнити</h2>
+          <p class="section-desc"></p>
+        </div>
+        <div class="cards-grid">
+          <div class="card">
+            <div class="card-num">💰</div>
+            <h4>Бизнес</h4>
+            <p>Увеличение продаж за счёт рекомендаций консультантов: знание продуктов (теория плюс личное использование), лояльность к брендам, эмоциональная связь внутри сообщества, частое касание с брендами в приятном и полезном контексте.</p>
+            <div class="metric">Доля рекомендаций на полке</div>
+          </div>
+          <div class="card">
+            <div class="card-num purple">🌍</div>
+            <h4>Внешняя</h4>
+            <p>Просвещение широких масс: правильный уход за волосами, телом и лицом с продуктами Tashe и Limba.</p>
+            <div class="metric">Охват и репутация</div>
+          </div>
+          <div class="card">
+            <div class="card-num gold">💗</div>
+            <h4>Внутренняя</h4>
+            <p>То, ради чего консультант остаётся в клубе.</p>
+            <div class="chips">
+              <span class="chip">1 · Эмоциональная поддержка</span>
+              <span class="chip">2 · Профессиональный уровень и экспертиза</span>
+              <span class="chip">3 · Самооценка и ценность</span>
+            </div>
+            <div class="metric">Самооценка растёт за счёт признания Flario</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 ДВЕ ГРУППЫ -->
+    <section class="page" id="gruppy">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-tag">02 · Две группы</span>
+          <h2 class="section-title">Канал — для всех. Клуб - для амбассадоров.</h2>
+          <p class="section-desc">Канал греет идею комьюнити и конвертирует в игру. Клуб: лояльность, промо, поощрение.</p>
+        </div>
+
+        <div class="split">
+          <div class="split-side">
+            <div class="ss-tag">Сегмент B · канал</div>
+            <h4>Консультанты ЗЯ</h4>
+            <p>Цель телеграм-канала: мотивировать попасть в клуб и повысить вовлеченность в геймификации. </p>
+            <ul>
+              <li><span class="mk">✓</span> Греем идею комьюнити: жизнь клуба, бонусы, кого позвали</li>
+              <li><span class="mk">✓</span> Зовём в игру: рейтинг — путь в клуб. Растут участие и конверсия</li>
+              <li><span class="mk">✕</span> Ссылки на чат нет</li>
+              <li><span class="mk">✕</span> Бонусы клуба открываются только амбассадорам</li>
+            </ul>
+          </div>
+
+          <div class="split-bridge">
+            <div class="bridge-line"></div>
+            <div class="bridge-ico">→</div>
+            <div class="bridge-txt">Топ-3 / месяц</div>
+            <div class="bridge-line"></div>
+          </div>
+
+          <div class="split-side locked">
+            <div class="ss-tag">Сегмент A · чат</div>
+            <h4>Амбассадоры ЗЯ</h4>
+            <p>Цель закрытого комьюнити: формирование амбассадорского ядра. Они промоутят бренды и само комьюнити.</p>
+            <ul>
+              <li><span class="mk">🎁</span> Гарантированный бокс от Flario</li>
+              <li><span class="mk">💸</span> Сертификат на OZON / ФлауВау / ЗЯ / Яндекс</li>
+              <li><span class="mk">🎤</span> Приглашение на закрытый ивент клуба </li>
+              <li><span class="mk">🔒</span> Бонусы открываются после выполнения заданий</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout">
+          <span class="co-ico">📍</span>
+          <p><strong>Фокус:</strong> ЗЯ — РБ, РФ, КЗ. Лэтуаль и Рив Гош не входят.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ВОРОНКА В ЧАТ -->
+    <section class="page" id="klub">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-tag">Воронка</span>
+          <h2 class="section-title">Воронка в закрытый чат</h2>
+          <p class="section-desc">Всех консультантов ЗЯ ведём в канал. В закрытый чат — только через личку КМ. </p>
+        </div>
+
+        <div class="funnel">
+          <div class="funnel-row fr-1">
+            <div class="fr-title">Все консультанты ЗЯ</div>
+            <div class="fr-sub">Телеграм-канал про клуб. Геймификация. Ссылки на чат нет</div>
+          </div>
+          <div class="funnel-arrow">▼</div>
+          <div class="funnel-row fr-2">
+            <div class="fr-title">Топ-3 рейтинга Flario</div>
+            <div class="fr-sub">Каждый месяц. Кто уже в клубе, место в таблице не занимает</div>
+          </div>
+          <div class="funnel-arrow">▼</div>
+          <div class="funnel-row fr-3">
+            <div class="fr-title">Личка + анкета</div>
+            <div class="fr-sub">После согласия. Молчит — остаётся в канале</div>
+          </div>
+          <div class="funnel-arrow">▼</div>
+          <div class="funnel-row fr-4">
+            <div class="fr-title">Закрытый чат</div>
+            <div class="fr-sub">Постепенное расширение базы в 3х странах</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ТРИ БОНУСА -->
+    <section class="page" id="privilegii">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-tag">Бонусы</span>
+          <h2 class="section-title">Бонусы</h2>
+          <p class="section-desc">Условия: 4 миссии недели, 1 реферал, активность в чате. Каждый бонус = 1 выполненное условие. </p>
+        </div>
+
+        <div class="lines">
+          <div class="line-card">
+            <div class="line-head">
+              <div class="lh-ico">📦</div>
+              <h4>Бокс</h4>
+              <p>Этого условия хватает, чтобы остаться в чате.</p>
+            </div>
+            <div class="line-cond">
+              <span class="lc-k">Условие</span>
+              4 миссии недели за месяц
+            </div>
+          </div>
+          <div class="line-card gold">
+            <div class="line-head">
+              <div class="lh-ico">🎫</div>
+              <h4>Сертификат</h4>
+              <p>За приведённого коллегу.</p>
+            </div>
+            <div class="line-cond">
+              <span class="lc-k">Условие</span>
+              1 реферал, коллега в игре
+            </div>
+          </div>
+          <div class="line-card purple">
+            <div class="line-head">
+              <div class="lh-ico">🎤</div>
+              <h4>Ивент</h4>
+              <p>За живое присутствие в чате и в канале.</p>
+            </div>
+            <div class="line-cond">
+              <span class="lc-k">Условие</span>
+              Активность в чате и канале
+            </div>
+          </div>
+        </div>
+
+        <div class="converge">▼ &nbsp; ▼ &nbsp; ▼</div>
+
+        <div class="converge-banner">
+          <div>
+            <h4>Минимум одно выполненное условие</h4>
+            <p>Чтобы остаться в закрытом клубе, нужно выполнить хотя бы 1 из условий.</p>
+          </div>
+          <div class="cb-num">1 / 3</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- МЕСЯЦ -->
+    <section class="page" id="mesyac">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-tag">Месяц</span>
+          <h2 class="section-title">Активный → пассивный → на выход</h2>
+          <p class="section-desc">Градация мягкая: один пустой месяц не выводит из клуба, второй — выводит, но без публичности.</p>
+        </div>
+
+        <div class="track">
+          <div class="track-card">
+            <div class="tc-state">Статус 01</div>
+            <h4>Выполнено min 1 условие</h4>
+            <p>Подарок за условие. Остаётся в чате. Следующий месяц начинается с нуля.</p>
+          </div>
+          <div class="track-link">
+            <span class="tl-cond"></span>
+            <span class="tl-arrow">→</span>
+          </div>
+          <div class="track-card warn">
+            <div class="tc-state">Статус 02</div>
+            <h4>Последний шанс</h4>
+            <p>Без подарков. Ещё месяц в чате, чтобы закрыть хотя бы одно условие.</p>
+          </div>
+          <div class="track-link">
+            <span class="tl-cond"></span>
+            <span class="tl-arrow">→</span>
+          </div>
+          <div class="track-card out">
+            <div class="tc-state">Статус 03</div>
+            <h4>Выход в личке</h4>
+            <p>Без имени в канале. Публично никого не называем.</p>
+          </div>
+        </div>
+
+        <div class="track-back">
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 РОЛИ -->
+    <section class="page" id="roli">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-tag">04 · Роли</span>
+          <h2 class="section-title">Роли участников сообщества</h2>
+          <p class="section-desc"></p>
+        </div>
+        <div class="roles">
+          <div class="role">
+            <div class="role-ico">🧪</div>
+            <div>
+              <div class="role-n">РОЛЬ 01</div>
+              <h4>Эксперт по продуктам Flario</h4>
+              <p>Досконально знает продукты и помогает другим разобраться в их функциях.</p>
+            </div>
+          </div>
+          <div class="role">
+            <div class="role-ico">🛍️</div>
+            <div>
+              <div class="role-n">РОЛЬ 02</div>
+              <h4>Эксперт по работе с клиентами</h4>
+              <p>Имеет большой опыт в клиентском сервисе и продажах.</p>
+            </div>
+          </div>
+          <div class="role">
+            <div class="role-ico">📸</div>
+            <div>
+              <div class="role-n">РОЛЬ 03</div>
+              <h4>Эксперт по блогингу</h4>
+              <p>Умеет создавать и упаковывать контент, чтобы растить личный бренд.</p>
+            </div>
+          </div>
+          <div class="role">
+            <div class="role-ico">🎉</div>
+            <div>
+              <div class="role-n">РОЛЬ 04</div>
+              <h4>Душа компании, заводила</h4>
+              <p>Объединяет людей, создаёт движ и поддерживает тёплую атмосферу.</p>
+            </div>
+          </div>
+          <div class="role">
+            <div class="role-ico">📣</div>
+            <div>
+              <div class="role-n">РОЛЬ 05</div>
+              <h4>Рекрутер сообщества</h4>
+              <p>Ищет новых участников и приглашает их присоединиться.</p>
+            </div>
+          </div>
+          <div class="role">
+            <div class="role-ico">🫂</div>
+            <div>
+              <div class="role-n">РОЛЬ 06</div>
+              <h4>«Психолог» сообщества</h4>
+              <p>Умеет слушать, поддерживать и давать правильные советы.</p>
+            </div>
+          </div>
+          <div class="role">
+            <div class="role-ico">✨</div>
+            <div>
+              <div class="role-n">РОЛЬ 07</div>
+              <h4>«Пиарщик» сообщества</h4>
+              <p>Занимается продвижением комьюнити и его репутацией вовне.</p>
+            </div>
+          </div>
+          <div class="role">
+            <div class="role-ico">💡</div>
+            <div>
+              <div class="role-n">РОЛЬ 08</div>
+              <h4>Генератор идей</h4>
+              <p>Постоянно придумывает новые темы, проекты и форматы для развития.</p>
+            </div>
+          </div>
+          <div class="role">
+            <div class="role-ico">🔥</div>
+            <div>
+              <div class="role-n">РОЛЬ 09</div>
+              <h4>Контент-провокатор</h4>
+              <p>Создаёт живые обсуждения, задавая нестандартные и острые вопросы. Без этих людей обсуждений не будет.</p>
+            </div>
+          </div>
+          <div class="role">
+            <div class="role-ico">🙂</div>
+            <div>
+              <div class="role-n">РОЛЬ 10</div>
+              <h4>Простой участник</h4>
+              <p>Своим присутствием делает сообщество живым, но особой активности не проявляет.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- РИТМ ЧАТА -->
+    <section class="page" id="zhizn">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-tag">Ритм чата</span>
+          <h2 class="section-title">Ритм чата</h2>
+          <p class="section-desc"></p>
+        </div>
+        <div class="life">
+          <div class="life-card">
+            <div class="life-top"><span class="life-ico">👋</span><span class="life-freq">При входе</span></div>
+            <h4>Онбординг</h4>
+            <div class="life-why">Адаптация</div>
+            <div class="life-where">Личка: вступительный приз, анкета, приветствие. В РБ — производство, если реально организовать.</div>
+          </div>
+          <div class="life-card">
+            <div class="life-top"><span class="life-ico">💅</span><span class="life-freq">1 / неделю</span></div>
+            <h4>Бьюти-чат</h4>
+            <div class="life-why">Свои, без сценария</div>
+            <div class="life-where">Регулярное обсуждение в среду.</div>
+          </div>
+          <div class="life-card">
+            <div class="life-top"><span class="life-ico">👑</span><span class="life-freq">Конец / начало месяца</span></div>
+            <h4>Амбассадор месяца</h4>
+            <div class="life-why">Видно на смене</div>
+            <div class="life-where">Специальный приз для активиста.</div>
+          </div>
+          <div class="life-card">
+            <div class="life-top"><span class="life-ico">🧴</span><span class="life-freq">1 / месяц</span></div>
+            <h4>Тест новинок</h4>
+            <div class="life-why">Закулисье бренда</div>
+            <div class="life-where">1 новинка / месяц + обсуждение в чате.</div>
+          </div>
+          <div class="life-card">
+            <div class="life-top"><span class="life-ico">🎂</span><span class="life-freq">Ситуативно</span></div>
+            <h4>Поздравления</h4>
+            <div class="life-why">Связь</div>
+            <div class="life-where">Подарок по факту события.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="doc-footer">
+      <div class="container">
+        <strong>Flario · Золотое Яблоко</strong> — план стратегии комьюнити.
+      </div>
+    </footer>
+
+  </main>
+</div>
+
+<script>
+  // подсветка активного пункта меню
+  var links = Array.prototype.slice.call(document.querySelectorAll('.nav-item'));
+  var sections = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+
+  function setActive() {
+    var pos = window.scrollY + window.innerHeight * 0.3;
+    var current = 0;
+    sections.forEach(function (s, i) { if (s && s.offsetTop <= pos) current = i; });
+    links.forEach(function (a, i) { a.classList.toggle('active', i === current); });
+
+    var h = document.body.scrollHeight - window.innerHeight;
+    document.getElementById('progressBar').style.width = h > 0 ? (window.scrollY / h * 100) + '%' : '0%';
+  }
+
+  window.addEventListener('scroll', setActive, { passive: true });
+  window.addEventListener('resize', setActive);
+  setActive();
+</script>
+
+</body>
+</html>
